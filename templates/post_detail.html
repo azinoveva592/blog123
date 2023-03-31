@@ -1,13 +1,21 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
-<div class="post-entry">
-    <h2>{{ post.title }}</h2>
-    <p>{{ post.body }}</p>
-</div>
-
-<p><a href="{% url 'post_edit' post.pk %}">+ Edit Blog Post</a></p>
-<p><a href="{% url 'post_delete' post.pk %}">+ Delete Blog Post</a></p>
-
-
-{% endblock content %}
+<h1>{{ post.title }}</h1>
+<p>{{ post.body }}</p>
+<hr>
+<h2 id="comments">Comments</h2>
+{% for comment in post.comment_set.all %}
+<b>{{ comment.name }}</b> said <b>{{ comment.created_on|timesince }} ago</b>
+<p>{{ comment.comment }}</p>
+{% empty %}
+<p>Feel free to leave the first comment!</p>
+{% endfor %}
+<hr>
+<h3>Add a comment</h3>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

@@ -1,11 +1,9 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
-{% for post in post_list %}
-<div class="post-entry">
-    <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
-    <p>{{ post.body }}</p>
-</div>
+{% for post in posts %}
+<h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a> </h2>
+<p>{{ post.body|truncatewords:10 }}</p>
 {% endfor %}
 {% include "pagination.html" %}
-{% endblock content %}
+{% endblock %}
