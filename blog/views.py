@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView # new
 from django.views.generic.edit import CreateView, UpdateView, DeleteView  # new

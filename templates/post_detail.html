@@ -4,18 +4,21 @@
 <h1>{{ post.title }}</h1>
 <p>{{ post.body }}</p>
 <hr>
-<h2 id="comments">Comments</h2>
+<h2 id="comments">комментарии</h2>
 {% for comment in post.comment_set.all %}
-<b>{{ comment.name }}</b> said <b>{{ comment.created_on|timesince }} ago</b>
+<b>{{ comment.name }}</b> написал <b>{{ comment.created_on|timesince }} назад</b>
 <p>{{ comment.comment }}</p>
 {% empty %}
-<p>Feel free to leave the first comment!</p>
+<p> Напиши комментарий! </p>
 {% endfor %}
 <hr>
-<h3>Add a comment</h3>
+<h3> Добавить комментарий </h3>
 <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Submit</button>
+    <button type="save">сохранить</button>
 </form>
+<a href="{% url 'post_edit' post.pk %}">+ Редактировать пост</a>
+<a href="{% url 'post_delete' post.pk %}">+ Удалить пост</a>
+
 {% endblock %}
